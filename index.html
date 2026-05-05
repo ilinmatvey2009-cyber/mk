@@ -1,11 +1,139 @@
 
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mortal Kombat 1</title>
   <link rel="stylesheet" href="style.css" />
+<div id="modal" class="modal-overlay">
+  <div class="modal-box">
+
+    <button class="modal-close" id="modalClose">✕</button>
+
+    <!-- Стрелка влево -->
+    <button class="modal-arrow modal-arrow--left" id="modalPrev">&#8592;</button>
+
+    <img id="modal-img" src="" alt="">
+    <p class="modal-caption" id="modal-caption"></p>
+
+    <!-- Счётчик: 1 / 19 -->
+    <p class="modal-counter" id="modal-counter"></p>
+
+    <!-- Стрелка вправо -->
+    <button class="modal-arrow modal-arrow--right" id="modalNext">&#8594;</button>
+
+  </div>
+</div>
+  <style>
+    /* ===== МОДАЛЬНОЕ ОКНО ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      position: relative;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.82); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+    .modal-box img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .modal-caption {
+      color: #c8a84e;
+      font-size: 1.5rem;
+      font-family: inherit;
+      margin-top: 16px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 12px rgba(200, 168, 78, 0.5);
+    }
+    .modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      line-height: 34px;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    /* Карточки — курсор указатель */
+    .char-row {
+      cursor: pointer;
+    }.modal-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: rgba(120, 0, 0, 0.7);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 42px;
+  transition: background 0.2s, transform 0.15s;
+  z-index: 10;
+}
+.modal-arrow:hover {
+  background: #c00;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.modal-arrow--left  { left:  -56px; }
+.modal-arrow--right { right: -56px; }
+
+/* Счётчик */
+.modal-counter {
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+/* Плавное переключение картинки */
+#modal-img {
+  transition: opacity 0.15s ease;
+}
+
+/* На маленьких экранах стрелки внутри окна */
+@media (max-width: 680px) {
+  .modal-arrow--left  { left:  4px; }
+  .modal-arrow--right { right: 4px; }
+  .modal-arrow {
+    top: auto;
+    bottom: 70px;
+    transform: none;
+  }
+  .modal-arrow:hover {
+    transform: scale(1.1);
+  }
+}
+  </style>
 </head>
 <body>
 
@@ -45,13 +173,10 @@
         <!-- SECTION 1 -->
         <section id="heroes-of-earth">
           <h2>Герои Земли</h2>
-
           <div class="char-list">
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Liu_Kang_in_MK1.png" alt="Лю Кан">
-              </div>
+              <div class="char-img"><img src="Liu_Kang_in_MK1.png" alt="Лю Кан"></div>
               <div class="char-info">
                 <h3>Лю Кан</h3>
                 <p>Огненный бог-защитник, переписал историю вселенной. Главный герой MK1. В новой реальности именно он стал Хранителем Песочных Часов и богом огня, заменив Рейдена.</p>
@@ -59,9 +184,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Sub-Zero_in_MK1.png" alt="Саб-Зиро">
-              </div>
+              <div class="char-img"><img src="Sub-Zero_in_MK1.png" alt="Саб-Зиро"></div>
               <div class="char-info">
                 <h3>Саб-Зиро (Би-Хан)</h3>
                 <p>Великий Мастер Лин Куэй. Холодный и расчётливый — ледяные кулаки, копья и мечи изо льда. Стал главой клана, который посвятил себя защите Земли.</p>
@@ -69,9 +192,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Scorpion_in_MK1.png" alt="Скорпион">
-              </div>
+              <div class="char-img"><img src="Scorpion_in_MK1.png" alt="Скорпион"></div>
               <div class="char-info">
                 <h3>Скорпион (Хасаши Ханзо)</h3>
                 <p>Лидер клана Ширай Рю. Больше не Адский Ниндзя — теперь брат Саб-Зиро. Знаменитые кинжалы на цепях остались при нём.</p>
@@ -79,9 +200,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Raiden_29_Render.webp" alt="Рейден">
-              </div>
+              <div class="char-img"><img src="Raiden_29_Render.webp" alt="Рейден"></div>
               <div class="char-info">
                 <h3>Рейден</h3>
                 <p>В этой реальности — простой фермер из деревни Феньянь, а не бог грома. Но молнии всё так же подчиняются ему в бою.</p>
@@ -89,9 +208,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Smoke_in_MK1.png" alt="Смоук">
-              </div>
+              <div class="char-img"><img src="Smoke_in_MK1.png" alt="Смоук"></div>
               <div class="char-info">
                 <h3>Смоук (Томаш Врбада)</h3>
                 <p>Приёмный сын прежнего главы Лин Куэй, названный брат Саб-Зиро и Скорпиона. Дымовые атаки и скрытность — его конёк.</p>
@@ -99,9 +216,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Johnny_Cage_in_MK1.png" alt="Джонни Кейдж">
-              </div>
+              <div class="char-img"><img src="Johnny_Cage_in_MK1.png" alt="Джонни Кейдж"></div>
               <div class="char-info">
                 <h3>Джонни Кейдж</h3>
                 <p>Голливудский актёр и боец. Харизматичный балагур с нуль-энергией. Его навыки боевых искусств часто ставятся под сомнение из-за кино — он всегда готов доказать обратное.</p>
@@ -109,9 +224,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="JmaAViXoBfE7zuaDqWDtNg.png.webp" alt="Гарос">
-              </div>
+              <div class="char-img"><img src="JmaAViXoBfE7zuaDqWDtNg.png.webp" alt="Гарос"></div>
               <div class="char-info">
                 <h3>Гарос</h3>
                 <p>Страж Песочных Часов из Нетер Царства — Камео-файтер. Создан Лю Каном, видит все временные линии и следит за их сохранностью.</p>
@@ -119,16 +232,14 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="m7E-c1aPZ9o-2lDzTNIxsA.png.webp" alt="Кун Лао">
-              </div>
+              <div class="char-img"><img src="m7E-c1aPZ9o-2lDzTNIxsA.png.webp" alt="Кун Лао"></div>
               <div class="char-info">
                 <h3>Кун Лао</h3>
                 <p>Монах Белого Лотоса, кузен Лю Кана. Смертоносная бритвенная шляпа — его фирменное оружие. Жаждет славы и проявить себя в каждой схватке.</p>
               </div>
             </div>
 
-          </div><!-- /.char-list -->
+          </div>
         </section>
 
         <hr>
@@ -136,13 +247,10 @@
         <!-- SECTION 2 -->
         <section id="outworld-warriors">
           <h2>Воины Внешнего мира</h2>
-
           <div class="char-list">
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="4Ud47QwXBQ73A2IsgcFj8A.png.webp" alt="Милина">
-              </div>
+              <div class="char-img"><img src="4Ud47QwXBQ73A2IsgcFj8A.png.webp" alt="Милина"></div>
               <div class="char-info">
                 <h3>Милина</h3>
                 <p>Дочь Шао, принцесса и правительница Аутерворлда. Импульсивна и воинственна. Скрывает заражение чумой Таркат под маской — если правда раскроется, её власть рухнет.</p>
@@ -150,9 +258,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="pPGBDueZz1bYHpgtxqKDTQ.png.webp" alt="Китана">
-              </div>
+              <div class="char-img"><img src="pPGBDueZz1bYHpgtxqKDTQ.png.webp" alt="Китана"></div>
               <div class="char-info">
                 <h3>Китана</h3>
                 <p>Принцесса Аутерворлда, возлюбленная Лю Кана. Стальные веера — смертоносное оружие с десятком острых лезвий. Рассудительна и миролюбива, в отличие от сестры.</p>
@@ -160,9 +266,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="CRlfbye2dcnfjYV3bgQnEA.png.webp" alt="Ли Мэй">
-              </div>
+              <div class="char-img"><img src="CRlfbye2dcnfjYV3bgQnEA.png.webp" alt="Ли Мэй"></div>
               <div class="char-info">
                 <h3>Ли Мэй</h3>
                 <p>Генерал армии Аутворлда, Первый Констебль Сан До. Сильная и принципиальная — была несправедливо изгнана из королевской стражи, но не сломалась.</p>
@@ -170,9 +274,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="ShangTsung_MK1_render.png" alt="Шэнг Цунг">
-              </div>
+              <div class="char-img"><img src="ShangTsung_MK1_render.png" alt="Шэнг Цунг"></div>
               <div class="char-info">
                 <h3>Шэнг Цунг</h3>
                 <p>Коварный чародей, похититель душ. Главный антагонист. Первый среди легендарных злодеев — именно он разрушает хрупкий баланс новой эры Лю Кана.</p>
@@ -180,9 +282,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="AVlesp05m7j0hajK0USqxw.png.webp" alt="Тань Джу">
-              </div>
+              <div class="char-img"><img src="AVlesp05m7j0hajK0USqxw.png.webp" alt="Тань Джу"></div>
               <div class="char-info">
                 <h3>Тань Джу (Таня)</h3>
                 <p>Элитный боец Королевской стражи Умгади. Абсолютная верность правителям Внешнего мира. С Милиной у неё особая тесная связь.</p>
@@ -190,9 +290,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Rain_in_Mortal_Kombat_1.png" alt="Рейн">
-              </div>
+              <div class="char-img"><img src="Rain_in_Mortal_Kombat_1.png" alt="Рейн"></div>
               <div class="char-info">
                 <h3>Рейн</h3>
                 <p>Полубог воды. Амбициозный и предательский — всегда выбирает сторону, выгодную лично ему. Бьёт врага потоками воды и затягивает в водовороты посохом.</p>
@@ -207,13 +305,10 @@
         <!-- SECTION 3 -->
         <section id="going-our-own-way">
           <h2>Идущие своим путём</h2>
-
           <div class="char-list">
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="TitanHavikRender.webp" alt="Хавик">
-              </div>
+              <div class="char-img"><img src="TitanHavikRender.webp" alt="Хавик"></div>
               <div class="char-info">
                 <h3>Хавик (Havik)</h3>
                 <p>Верховный жрец Хаоса из Чайной Земли. Фанатичный и непредсказуемый — его цель разрушить любой порядок, включая новую реальность Лю Кана.</p>
@@ -221,9 +316,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="Reptile_in_MK1.png" alt="Рептилия">
-              </div>
+              <div class="char-img"><img src="Reptile_in_MK1.png" alt="Рептилия"></div>
               <div class="char-info">
                 <h3>Рептилия (Reptile)</h3>
                 <p>Уроженец Затерры, телохранитель Милины. Способен принимать облик человека, плеваться кислотой. Изгнан своими сородичами — ищет новый дом.</p>
@@ -231,9 +324,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="2G_QKvK_YKrUaIfcWgrwXg.png.webp" alt="Кенши">
-              </div>
+              <div class="char-img"><img src="2G_QKvK_YKrUaIfcWgrwXg.png.webp" alt="Кенши"></div>
               <div class="char-info">
                 <h3>Кенши (Kenshi)</h3>
                 <p>Слепой самурай с телекинетическим мечом Сентинель. Один из центральных персонажей сюжета. Одержим восстановлением чести своей фамилии.</p>
@@ -241,9 +332,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="GwFuk25r5RE9r1VWo6FVug.png.webp " alt="Эшра">
-              </div>
+              <div class="char-img"><img src="GwFuk25r5RE9r1VWo6FVug.png.webp" alt="Эшра"></div>
               <div class="char-info">
                 <h3>Эшра (Ashrah)</h3>
                 <p>Демоница из Неизведанного, стремится к искуплению через убийство зла. Её путь очищения ведёт её сквозь кровопролитие к свету.</p>
@@ -258,13 +347,10 @@
         <!-- SECTION 4 -->
         <section id="rest">
           <h2>Звёзды Голливуда</h2>
-
           <div class="char-list">
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="EGS_MK1OmniMan_NetherRealmStudiosQLOC_DLC_S2_1200x1600-7f72c7309ba4f9e99ad1ad1fce97bc93.jfif" alt="Омни-Мэн">
-              </div>
+              <div class="char-img"><img src="EGS_MK1OmniMan_NetherRealmStudiosQLOC_DLC_S2_1200x1600-7f72c7309ba4f9e99ad1ad1fce97bc93.jfif" alt="Омни-Мэн"></div>
               <div class="char-info">
                 <h3>Омни-Мэн</h3>
                 <p>Гостевой персонаж из вселенной Invincible (Amazon). Настоящее имя — Нолан Грейсон, Вильтрумит. Сильнее Супермена, летит быстрее пули. Озвучен Дж. К. Симмонсом — один из самых жестоких персонажей в игре.</p>
@@ -272,9 +358,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="EGS_MK1Homelander_NetherRealmStudiosQLOC_DLC_S2_1200x1600-5dd20936fa15c8963131819d0ef2614f.jfif" alt="Хоумлендер">
-              </div>
+              <div class="char-img"><img src="EGS_MK1Homelander_NetherRealmStudiosQLOC_DLC_S2_1200x1600-5dd20936fa15c8963131819d0ef2614f.jfif" alt="Хоумлендер"></div>
               <div class="char-info">
                 <h3>Хоумлендер (Homelander)</h3>
                 <p>Гостевой персонаж из сериала The Boys (Amazon). Внешне — патриот и кумир миллионов, внутри — социопат. Лазерное зрение, сверхсила, полёт. Озвучен Энтони Старром.</p>
@@ -282,9 +366,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="EGS_MK1ConantheBarbarian_NetherRealmStudiosQLOC_DLC_S2_1200x1600-1bfc422a9a627628a61b5ea90244fac2.jfif" alt="Конан-Варвар">
-              </div>
+              <div class="char-img"><img src="EGS_MK1ConantheBarbarian_NetherRealmStudiosQLOC_DLC_S2_1200x1600-1bfc422a9a627628a61b5ea90244fac2.jfif" alt="Конан-Варвар"></div>
               <div class="char-info">
                 <h3>Конан-Варвар</h3>
                 <p>Легендарный воин из Киммерии с огромным мечом. Грубая сила, варварские добивания — никакой магии, только сталь. Визуально напоминает образ Шварценеггера из фильма 1982 года.</p>
@@ -292,9 +374,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="images.jfif" alt="Призрачное Лицо">
-              </div>
+              <div class="char-img"><img src="31994c5cfcded0e1b0a3abb89e38e922db711dec75ba8ea5-600x600.jpg" alt="Призрачное Лицо"></div>
               <div class="char-info">
                 <h3>Призрачное Лицо (Ghostface)</h3>
                 <p>Гостевой персонаж из хоррор-франшизы Scream. Нож, ловушки и психологические уловки. Несколько костюмов отсылают к разным убийцам из серии фильмов.</p>
@@ -302,9 +382,7 @@
             </div>
 
             <div class="char-row">
-              <div class="char-img">
-                <img src="EGS_MK1T1000_NetherRealmStudiosQLOC_DLC_S2_1200x1600-230ff67fd03a216104c9ee719f8bd5d8.jfif" alt="T-1000">
-              </div>
+              <div class="char-img"><img src="EGS_MK1T1000_NetherRealmStudiosQLOC_DLC_S2_1200x1600-230ff67fd03a216104c9ee719f8bd5d8.jfif" alt="T-1000"></div>
               <div class="char-info">
                 <h3>T-1000</h3>
                 <p>Из «Терминатора 2: Судный день» (1991). Полиморфный боевой робот из жидкого металла. Превращает конечности в клинки и крюки. Один из самых желанных гостей за всю историю серии.</p>
@@ -317,19 +395,123 @@
       </div><!-- /.content -->
     </div><!-- /.layout -->
   </main>
+
+  <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+  <div id="modal" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕</button>
+      <img id="modal-img" src="" alt="">
+      <p class="modal-caption" id="modal-caption"></p>
+    </div>
+  </div>
+
   <script>
-    // Кнопка наверх
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', () => {
-      toTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
-    });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    toTop.style.display = 'none';
+   /* ══════════════════════════════════════
+   Mortal Kombat 1 — script.js
+   ══════════════════════════════════════ */
+
+/* ── Кнопка «Наверх» ── */
+const toTop = document.getElementById('toTop');
+
+window.addEventListener('scroll', () => {
+  toTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+});
+
+toTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+toTop.style.display = 'none';
+
+
+/* ══════════════════════════════════════
+   МОДАЛЬНОЕ ОКНО
+   ══════════════════════════════════════ */
+const modal      = document.getElementById('modal');
+const modalImg   = document.getElementById('modal-img');
+const modalCap   = document.getElementById('modal-caption');
+const modalClose = document.getElementById('modalClose');
+const modalPrev  = document.getElementById('modalPrev');
+const modalNext  = document.getElementById('modalNext');
+
+/* Список всех карточек — собирается один раз */
+const allCards = Array.from(document.querySelectorAll('.char-row'));
+let currentIndex = 0;
+
+/* Показать персонажа по индексу */
+function showCard(index) {
+  const card = allCards[index];
+  const img  = card.querySelector('.char-img img');
+  const name = card.querySelector('.char-info h3');
+
+  modalImg.src         = img ? img.src : '';
+  modalImg.alt         = img ? img.alt : '';
+  modalCap.textContent = name ? name.textContent : '';
+
+  /* Счётчик: "3 / 19" */
+  document.getElementById('modal-counter').textContent =
+    `${index + 1} / ${allCards.length}`;
+
+  /* Затухание и появление картинки */
+  modalImg.style.opacity = '0';
+  setTimeout(() => { modalImg.style.opacity = '1'; }, 50);
+}
+
+/* Открыть */
+function openModal(index) {
+  currentIndex = index;
+  showCard(currentIndex);
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/* Закрыть */
+function closeModal() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* Следующий */
+function nextCard() {
+  currentIndex = (currentIndex + 1) % allCards.length;
+  showCard(currentIndex);
+}
+
+/* Предыдущий */
+function prevCard() {
+  currentIndex = (currentIndex - 1 + allCards.length) % allCards.length;
+  showCard(currentIndex);
+}
+
+/* Клик по карточке */
+allCards.forEach((card, index) => {
+  card.addEventListener('click', () => openModal(index));
+});
+
+/* Кнопки стрелок */
+modalPrev.addEventListener('click', e => { e.stopPropagation(); prevCard(); });
+modalNext.addEventListener('click', e => { e.stopPropagation(); nextCard(); });
+
+/* Крестик */
+modalClose.addEventListener('click', closeModal);
+
+/* Клик по тёмному фону */
+modal.addEventListener('click', e => {
+  if (e.target === modal) closeModal();
+});
+
+/* Клавиатура */
+document.addEventListener('keydown', e => {
+  if (!modal.classList.contains('active')) return;
+  if (e.key === 'Escape')     closeModal();
+  if (e.key === 'ArrowRight') nextCard();
+  if (e.key === 'ArrowLeft')  prevCard();
+});
+``
   </script>
+
 </body>
 </html>
 <footer>
-  <section id="contacs">
-
-  </section>
+  <section id="contacs"></section>
 </footer>

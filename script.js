@@ -100,4 +100,30 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') nextCard();
   if (e.key === 'ArrowLeft')  prevCard();
 });
-``
+/* ══════════════════════════════════════
+   СВАЙП НА ТЕЛЕФОНЕ
+   ══════════════════════════════════════ */
+let touchStartX = 0;
+let touchEndX   = 0;
+
+modal.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+modal.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const diff = touchStartX - touchEndX;
+
+  /* Минимум 50px — чтобы случайный тап не считался свайпом */
+  if (Math.abs(diff) < 50) return;
+
+  if (diff > 0) {
+    nextCard(); /* свайп влево → следующий */
+  } else {
+    prevCard(); /* свайп вправо → предыдущий */
+  }
+}

@@ -604,7 +604,11 @@ footer section#contacs {
     height: 165px;
   }
 }
-
+@media (max-width: 380px) {
+  .char-img { height: 160px; }
+  .char-info h3 { font-size: 1.1rem; }
+  .char-info p  { font-size: 0.78rem; }
+}
 
 
 
